@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatable" content="IE=Edge,Chrome=1.0">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+	<meta name="format-detection" content="telephone=no">
+	<meta name="format-detection" content="email=no">
+	<title>GPA查询</title>
+	<link rel="stylesheet" href="/dist/lib/weui.css">
+	<link rel="stylesheet" href="/dist/css/jquery-weui.css">
+	<link rel="stylesheet" href="/main.css">
+</head>
+<body>
+	<header class="header">
+	    <h1 class="title">成绩查询</h1>
+	</header>
+	<form id="Form" method="post" action="/main/GPA/viewDetail" class="weui_cells weui_cells_form">
+		<div class="weui_cell">
+		    <div class="weui_cell_hd">
+		        <label for="year" class="weui_label">
+		            学年
+		        </label>
+		    </div>
+		    <div class="weui_cell_bd weui_cell_primary">
+		        <input class="weui_input" id="year" name="year" type="text" value="" readonly="">
+		    </div>
+		</div>
+		<div class="weui_cell">
+		    <div class="weui_cell_hd">
+		        <label for="item" class="weui_label">
+		            学期
+		        </label>
+		    </div>
+		    <div class="weui_cell_bd weui_cell_primary">
+		        <input class="weui_input" id="item" name="item" type="text" value="" readonly="">
+		    </div>
+		</div>
+	</form>
+	<div class="button_sp_area marginTop">
+		<button href="javascript:;" class="weui_btn weui_btn_primary" id="submit">查询</button>
+	</div>	
+
+<script src="/dist/lib/jquery-2.1.4.js"></script>
+<script src="/dist/js/jquery-weui.js"></script>
+<script>
+$(document).ready(function(){
+	$("#year").picker({
+	    title: "请选择学年",
+	    cols: [{
+	        textAlign: 'center',
+	        values: ['2012-2013', '2013-2014', '2014-2015', '2015-2016', '2016-2017']
+	    }]
+	});
+	$("#item").picker({
+	    title: "请选择学期",
+	    cols: [{
+	        textAlign: 'center',
+	        values: ['1', '2']
+	    }]
+	});
+	$("#submit").click(function(){
+		var year = $("#year").val();
+		var item = $("#item").val();
+		if (year==="" || item==="") {
+			$.alert("选项不能为空");
+		}else{
+			$("#Form").submit();
+		}
+	})
+})
+</script>
+</body>
+</html>

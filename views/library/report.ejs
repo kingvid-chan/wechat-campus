@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="zh-CN">   
+<head>
+    <title>看到这个，你肯定不会再去图书馆</title>
+    <link rel="shortcut icon" href="/images/lib.png">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,Chrome=1.0">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <link rel="stylesheet" type="text/css" href="/report/css/load.css" /> 
+	<link rel="stylesheet" type="text/css" href="/report/css/index.css" />
+	<link rel="stylesheet" type="text/css" href="/report/css/animations.css" />
+	<link rel="stylesheet" href="/dist/lib/weui.css">
+    <link rel="stylesheet" href="/dist/css/jquery-weui.css">
+    <link rel="stylesheet" href="/main.css">
+</head>
+<body ontouchstart class="report">
+	<div id="loading">
+     	<div class="spinner">
+  			<div class="double-bounce1"></div>
+  			<div class="double-bounce2"></div>
+		</div>
+	</div>
+	<div class="arrow">
+		由<a href="javascript:;" class="favor">i小蜜</a>提供技术支持
+	</div>
+	<div class="share-cover hide">
+		<img src="/report/images/guide.png" alt="">
+	</div>
+	<div id="content" style="display:none">
+		 <div class="page page-1-1 page-current">
+			<div class="wrap">
+				<div id="classCanvas" class="canvas page-moveScale page-delay400 title"></div>
+			</div>
+		</div>
+		<div class="page page-2-1 hide">
+			<div class="wrap">
+				<div id="yearCanvas" class="canvas page-moveScale page-delay400 title"></div>
+			</div>
+		</div>
+		<div class="page page-3-1 hide">
+			<div class="wrap">
+				<div id="monthCanvas" class="canvas page-moveScale page-delay400 title"></div>
+			</div>
+		</div>
+		<div class="page page-4-1 hide">
+			<div class="wrap">
+				<div class="weui_panel weui_panel_access">
+				    <div class="weui_panel_hd">
+				        <h1>在所有读者中</h1> 
+				        <h3>排在<b></b>的人之前</h3>
+				    	<div class="meter animate" id="progress-bar"></div>
+				    </div>
+				    <div class="button_sp_area marginTop">
+				        <a href="javascript:;" class="weui_btn weui_btn_primary" id="share">分享</a>
+				    </div>
+				    <div class="button_sp_area marginTop">
+				        <a href="javascript:;" class="weui_btn weui_btn_primary favor">关注i小蜜</a>
+				    </div>
+				</div>
+			</div>
+		</div> 
+	</div>	
+<script src="/report/js/zepto.min.js"></script>
+<script src="/report/js/touch.js"></script>
+<script src="/report/js/index.js"></script>
+<script src="/dist/lib/jquery-2.1.4.js"></script>
+<script src="/canvasjs.min.js"></script>
+<script src="/dist/js/jquery-weui.js"></script>
+<script>
+$(window).load(function(){
+	var windowWidth = $(window).width();
+	$.ajax({
+	    url: '/main/library/report/chartPie',
+	    dataType: 'json',
+	    success: function(_data) {
+	    	$("#loading").hide();
+	    	$("#content").show();
+	    	var data = JSON.parse(_data.data);
+	        var classChart = new CanvasJS.Chart("classCanvas", {
+	            theme: "theme2",
+	            title: {
+	                text: "借阅分类分布"
+	            },
+	            animationEnabled:true,
+	            data: [{
+	                type: "pie",
+	                showInLegend: true,
+	                dataPoints: data
+	            }]
+
+	        });
+	        classChart.render();
+	        //添加排名
+	        $("#progress-bar").append('<span origWidth="'+_data.rank+'" style="width:'+_data.rank+';"><span></span></span>').prev('h3').find('b').text(_data.rank);
+
+	        $(".meter > span").each(function(){
+	        	$(this).data("origWidth", $(this).width()).width('0%');
+	        })
+
+	        //加载第二个图表
+	        $.ajax({
+	        	url: '/main/library/report/chartColumn',
+	        	dataType: 'json',
+	        	success: function(data){
+	        		var yearChart = new CanvasJS.Chart("yearCanvas", {
+	                    theme: "theme2",
+	                    title: {
+	                        text: "借阅时间分布"
+	                    },
+	                    width:windowWidth,
+	                    animationEnabled:true,
+	                    data: [{
+	                        dataPoints: data
+	                    }]
+
+	                });
+	                yearChart.render();
+
+	                $.ajax({
+	                    url: '/main/library/report/chartLine',
+	                    dataType: 'json',
+	                    success: function(data) {
+	                        var dataPoints = new Array();
+	                        for (i = 0; i < data.length; i++) {
+	                            dataPoints[i] = new Object();
+	                            dataPoints[i].x = new Date(data[i].year, data[i].month, data[i].day);
+	                            dataPoints[i].y = data[i].y;
+	                        }
+	                        var monthChart = new CanvasJS.Chart("monthCanvas", {
+	                            theme: "theme1",
+	                            title: {
+	                                text: "借阅趋势"
+	                            },
+	                            width:windowWidth,
+	                            animationEnabled:true,
+	                            axisX: {
+	                            	title:'月份',
+	                                valueFormatString: "M",
+	                                intervalType: "month",
+	                                labelFontSize: 12,
+	                                interval: 1,
+	                                labelFontColor: "grey",
+	                                labelFontWeight: "bold"
+	                            },
+	                            axisY: {
+	                                includeZero: false,
+	                                labelFontSize: 14,
+	                                labelFontColor: "grey",
+	                                labelFontWeight: "bold"
+	                            },
+	                            data: [{
+	                                indexLabelFontSize: 14,
+	                                indexLabelFontFamily: "aril",
+	                                indexLabelFontColor: "darkgrey",
+	                                indexLabelLineColor: "darkgrey",
+	                                indexLabelPlacement: "outside",
+	                                type: "line",
+	                                // lineThickness: 3,        
+	                                dataPoints: dataPoints
+	                            }]
+	                        });
+	                        monthChart.render();
+	                       
+	                    }
+
+	                });
+	        	}
+	        })
+
+	    }
+	});
+
+	$("#share").click(function(){
+		$(".share-cover").removeClass('hide');
+	})
+	$(".share-cover").click(function(){
+		$(".share-cover").addClass('hide');
+	})
+	$(".favor").click(function(){
+		$.alert('<img src="/report/images/qrcode.jpg" style="width:100%" alt="i小蜜二维码">','长按二维码扫描关注i小蜜');
+	})
+})
+</script>
+</body>
+</html>

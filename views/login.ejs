@@ -1,0 +1,111 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatable" content="IE=Edge,Chrome=1.0">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="format-detection" content="email=no">
+    <link rel="stylesheet" href="/dist/lib/weui.css">
+    <link rel="stylesheet" href="/dist/css/jquery-weui.css">
+    <link rel="stylesheet" href="/main.css">
+</head>
+<body class="login-wrapper">
+    <header class="header">
+        <h1 class="title">账号绑定</h1>
+    </header>
+    <form class="weui_cells weui_cells_form"  action="/main/login"  onsubmit="return validate(this);" method="post" id="Form">
+        <div class="weui_cell">
+            <div class="weui_cell_hd">
+                <label class="weui_label">
+                    学号
+                </label>
+            </div>
+            <div class="weui_cell_bd weui_cell_primary">
+                <input class="weui_input" type="tel" name="userNumber" value="" id="userNumber" placeholder="请输入学号" />
+            </div>
+        </div>
+        <div class="weui_cell">
+            <div class="weui_cell_hd">
+                <label class="weui_label">
+                    密码
+                </label>
+            </div>
+            <div class="weui_cell_bd weui_cell_primary">
+                <input class="weui_input" type="password" name="password" value="" id="password"  placeholder="请输入信息门户密码">
+            </div>
+        </div>
+    </form>
+    <form action="/main/login"  onsubmit="return _validate(this);" method="post" id="Form_hidden">
+        <input type="hidden" id="password_jwxt" name="password_jwxt">
+        <input type="hidden" id="userNumber_backup" name="userNumber_backup" value="<%= userNumber %>">
+    </form>
+    <div class="button_sp_area marginTop">
+        <a href="javascript:;" class="weui_btn weui_btn_primary" id="submit">确定</a>
+    </div>
+<script id="scriptId" data-err='<%= err%>' data-notTheSame='<%= notTheSame %>'></script>
+<script src="/dist/lib/jquery-2.1.4.js"></script>
+<script src="/dist/js/jquery-weui.js"></script>
+<script>
+$(document).ready(function(){
+    var clickable = true;
+    $("#submit").click(function(){
+        if (clickable) {
+            $("#Form").submit();
+        }
+    })
+    var err = $("#scriptId").attr("data-err");
+    var notTheSame = $("#scriptId").attr("data-notTheSame");
+    if (notTheSame==='true') {
+        clickable = false;
+        $("#submit").addClass('weui_btn_disabled');
+        if (err!=='') {
+            $.alert("教务系统密码错误！",function(){
+                $.prompt('<p class="weui-prompt-text">请输入正确的教务系统密码</p><input type="password" class="weui_input weui-prompt-input" id="weui-prompt-input">',
+                function(text) {
+                    $('#password_jwxt').val(text);
+                    $.showLoading("正在验证...");
+                    $("#Form_hidden").submit();
+                });
+            });
+        }else{
+            $.prompt('<p class="weui-prompt-text">检验到你的信息门户密码与教务系统密码不一致，为了你的最佳使用体验，请输入教务系统密码</p><input type="password" class="weui_input weui-prompt-input" id="weui-prompt-input">',
+            function(text) {
+                $('#password_jwxt').val(text);
+                $("#Form_hidden").submit();
+            });
+        }
+    }else if (err!=='') {
+        $.alert("学号或密码错误！");
+    }
+})
+    function validate(form){
+        var userNumber = form.userNumber.value;
+        var password = form.password.value;
+        if (userNumber.replace(" ","").length !==11) {
+            $.alert("学号输入有误！");
+            return false;
+        }else{
+            $.showLoading("正在验证...");
+        }
+    }
+    function _validate(form){
+        var password = form.password_jwxt.value;
+        if (password.replace(" ","").length===0) {
+            $.alert("密码输入有误！",function(){
+                $.prompt('<p class="weui-prompt-text">请输入正确的教务系统密码</p><input type="password" class="weui_input weui-prompt-input" id="weui-prompt-input">',
+                function(text) {
+                    $('#password_jwxt').val(text);
+                    $.showLoading("正在验证...");
+                    $("#Form_hidden").submit();
+                });
+            });
+            return false;
+        }else{
+            $.showLoading("正在验证...");
+        }
+    }
+    
+</script>
+</body>
+</html>

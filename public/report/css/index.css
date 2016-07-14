@@ -1,0 +1,208 @@
+* {
+  margin: 0;
+  padding: 0;
+  outline: none;
+} 
+body {
+  width: 100%; 
+  font-family: "微软雅黑";
+  font-size: 14px;
+  color: #000;
+  -webkit-touch-callout: inherit;
+  -webkit-user-select: auto;
+  background-color: #fff;
+}
+a,button,input,li,img{
+    -webkit-tap-highlight-color:rgba(255,0,0,0);
+}
+.hide { 
+	display:none;
+}
+.page {
+	width:100%;
+	height:100%;
+	position:absolute;
+	text-align:center;
+	overflow: hidden;
+}
+.page-current {
+	z-index:1;
+}
+.hidden{
+	display: none !important;
+	visibility: hidden !important;
+}
+img{
+	margin-left: auto;
+	margin-right: auto;
+}
+.page-2-1 img.title,.page-2-1 img.girl,.page-2-1 img.man{
+	width: auto;
+	z-index: 8;
+}
+img.bottom{
+	width: 100%;
+	position: absolute;
+	bottom: 0;
+	z-index: 9;
+	left: 0;
+}
+img.bg{
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	left: 0;
+	top: 0;
+	z-index: -1;
+}
+.page-2-1  img.title{
+	margin-top: 15%;
+	height: 30%;
+  	left: 15%;
+  	position: absolute;
+}
+img.girl,
+img.center{
+	position: absolute;
+	bottom: 0;
+  	left: 0;
+  	height: 100%;
+  	z-index: 2;
+}
+.page-2-1 img.girl{
+  	height: 60%;
+}
+img.man{
+	position: absolute;
+  	bottom: 0;
+  	right: 0;
+  	height: 100%;
+}
+img.fly{
+	position: absolute;
+	bottom: 10%;
+	z-index: 999;
+	left: 0;
+	width: 100%;
+	height: auto;
+}
+.page-2-1 img.man{
+	height: 50%;
+}
+.page-3-1 img.man{
+  position: absolute;
+  right: 0;
+  height: 100%;
+  top: 0;
+}
+img.title{
+	margin-top: 8%;
+  	width:320px;
+  	left: 0;
+  	height: auto;
+}
+@media (min-width: 350px){
+	img.title{
+		width: 100%;
+		left: 0;
+		height: auto;
+	}
+}
+.page-3-1 img.girl{
+  	position: absolute;
+  	left: 0;
+  	height: 100%;
+  	top: 0;
+}
+.page-5-1 img.center{
+  	z-index: -1;
+ 	right: 0;
+}
+video{
+	position: absolute;
+  	width: 79%;
+  	left: 11%;
+  	height: 39%;
+  	top: 49.5%;
+}
+.video{
+	margin-top: 2.5%;
+  	width: 80%;
+  	left: 11%;
+  	position: absolute;
+  	bottom: 11.5%;
+  	height: 32%;
+}
+.video iframe{
+	width: 100%;
+	height: 100%;
+	position: relative;
+	left: 0;
+	top: 0;
+}
+.page-7-1 img.girl{
+	width: 100%;
+}
+.page-1-1 img.title{
+	margin-top: 0 !important;
+}
+.arrow img {
+	width:50px;
+	top:93%;
+	position: absolute;
+	left: 50%;
+	margin-left:-25px;
+	z-index: 9999;
+}
+.page-6-1 img.title{
+	position: relative;
+	max-width: 640px;
+}
+@media(max-height: 600px){
+	.page-6-1 img.title{
+		max-width: 250px;
+	}
+}
+@media(min-height: 601px)and(max-height: 1000px){
+	.page-6-1 img.title{
+		max-width: 320px;
+	}
+}
+@media(min-height: 1001px){
+	.page-6-1 img.title{
+		max-width: 640px;
+	}
+}
+#music {
+	position: fixed;
+	right: 5px;
+	top: 5px;
+	z-index: 10000;
+	transform:rotate(10deg);
+	-webkit-transform:rotate(10deg); /* Safari 和 Chrome */
+}
+#music > img{
+	z-index: 10000;
+	position: relative;
+}
+.music-show {
+	animation: musicshow 2s infinite alternate;
+	-webkit-animation: musicshow 2s infinite alternate;	/* Safari 和 Chrome */
+}
+@keyframes musicshow {
+	from {
+		transform:rotate(-15deg);
+	}
+	to {
+		transform:rotate(15deg);
+	}
+}
+
+@-webkit-keyframes musicshow {	/* Safari 和 Chrome */
+	from {
+		-webkit-transform:rotate(-15deg);
+	}
+	to { 
+		-webkit-transform:rotate(15deg);
+	}
+}

@@ -1,0 +1,77 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatable" content="IE=Edge,Chrome=1.0">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="format-detection" content="email=no">
+    <title>当前借阅</title>
+    <link rel="stylesheet" href="/dist/lib/weui.css">
+    <link rel="stylesheet" href="/dist/css/jquery-weui.css">
+    <link rel="stylesheet" href="/main.css">
+</head>
+<body>  
+  	<%  for (var index = 1; index < result.length; index++) { %>
+      <div class="weui_cells allowOneLine weui_panel_access lendingList">
+         <% var i = 0; %>
+         <% for (var p in result[index]) { %>
+         <% if(i<5){ %>
+          <div class="weui_cell">
+              <div class="weui_cell_bd weui_cell_primary">
+                  <p>
+                      <%= result[0][p] %>
+                  </p>
+              </div>
+              <div class="weui_cell_ft">
+                  <%= result[index][p] %>
+              </div>
+          </div>
+         <% i++; %>
+         <% } %> 
+         <% } %> 
+          <a class="weui_panel_ft unrenew" href="javascript:void(0);" data-bookId="<%= result[index].bookId %>" data-check="<%= result[index].check %>" data-listId="<%= result[index].listId %>">续借</a>
+      </div>
+     <% } %>
+<script data-alert='<%= result[0].alert %>' id="data-alert"></script>
+<script data-cookies='<%= result[0].cookies %>' id="data-cookies"></script>
+<script src="/dist/lib/jquery-2.1.4.js"></script>
+<script src="/dist/js/jquery-weui.js"></script>
+<script>
+$(document).ready(function(){
+	var alert = $("#data-alert").attr('data-alert');
+	if (alert.indexOf('超期')!==-1) {
+		var html = '<p style="color:red;text-align:center">部分或全部书籍超期，不能续借！</p>'
+		$("body").prepend(html);
+		$('.weui_panel_ft').removeClass('unrenew').addClass('renewError').text('无法续借');
+	}else{
+		$('.weui_panel_ft').click(function(){
+			if ($(this).hasClass('unrenew')) {
+				_this = $(this);
+				$.confirm("确认续借？", function() {
+					$.showLoading("请稍等...");
+				    var cookies = $("#data-cookies").attr('data-cookies'),
+				    	bar_code = _this.attr('data-bookId'),
+				    	check = _this.attr('data-check');
+				    $.ajax({
+				    	url:'/main/library/lending/renewCaptcha',
+				    	data:{cookies:cookies,bar_code:bar_code,check:check},
+				    	dataType:'text',
+				    	success:function(result){
+				    		$.hideLoading();
+				    		$.alert(result);
+				    		if (result.indexOf('成功')!==-1) {
+				    			_this.removeClass('unrenew').addClass('renewed').text('续借成功');
+				    		}else{
+				    			_this.removeClass('unrenew').addClass('renewError').text('续借失败');
+				    		}
+				    	}
+				    })
+				});
+			}
+		})
+	}
+})
+</script>
+</body>
+</html>

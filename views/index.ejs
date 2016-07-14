@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="zh-CN">   
+<head>
+    <title>Welcome</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,Chrome=1.0">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <link rel="stylesheet" href="/dist/lib/weui.css">
+    <link rel="stylesheet" href="/dist/css/jquery-weui.css">
+    <link rel="stylesheet" href="/main.css">
+</head>
+<body>
+	<div class="weui_msg">
+	    <div class="weui_icon_area">
+	        <i class="weui_icon_success weui_icon_msg">
+	        </i>
+	    </div>
+	    <div class="weui_text_area">
+	        <h2 class="weui_msg_title">
+	            登陆成功
+	        </h2>
+	        <p class="weui_msg_desc">
+	            欢迎你，<%= userName %>
+	        </p>
+	    </div>
+	    <div class="weui_grids">
+	        <a href="/main/library" class="weui_grid js_grid" data-id="button">
+	            <div class="weui_grid_icon">
+	                <img src="/images/icon_nav_city.png" alt="">
+	            </div>
+	            <p class="weui_grid_label">
+	                图书馆
+	            </p>
+	        </a>
+	        <a href="javascript:;" class="weui_grid js_grid" data-id="dialog" id="chat">
+	            <div class="weui_grid_icon">
+	                <img src="/images/icon_nav_dialog.png" alt="">
+	            </div>
+	            <p class="weui_grid_label">
+	                聊天
+	            </p>
+	        </a>
+	        <a href="/main/levelscore" class="weui_grid js_grid" data-id="progress">
+	            <div class="weui_grid_icon">
+	                <img src="/images/icon_nav_progress.png" alt="">
+	            </div>
+	            <p class="weui_grid_label">
+	                等级考试
+	            </p>
+	        </a>
+	        <a href="/main/course" class="weui_grid js_grid" data-id="article">
+	            <div class="weui_grid_icon">
+	                <img src="/images/icon_nav_article.png" alt="">
+	            </div>
+	            <p class="weui_grid_label">
+	                课表
+	            </p>
+	        </a>
+	        <a href="/main/card/thisDay" class="weui_grid js_grid">
+	            <div class="weui_grid_icon">
+	                <img src="/images/icon_nav_panel.png" alt="">
+	            </div>
+	            <p class="weui_grid_label">
+	                一卡通
+	            </p>
+	        </a>
+	        <a href="/main/GPA" class="weui_grid js_grid">
+	            <div class="weui_grid_icon">
+	                <img src="/images/icon_nav_search_bar.png" alt="">
+	            </div>
+	            <p class="weui_grid_label">
+	                成绩
+	            </p>
+	        </a>
+	        <!-- <a href="/xiaozhao" class="weui_grid js_grid" data-id="cell">
+	            <div class="weui_grid_icon">
+	                <img src="/images/icon_nav_cell.png" alt="">
+	            </div>
+	            <p class="weui_grid_label">
+	                校招
+	            </p>
+	        </a>
+	        <a href="/shixi" class="weui_grid js_grid" data-id="actionsheet">
+	            <div class="weui_grid_icon">
+	                <img src="/images/icon_nav_actionSheet.png" alt="">
+	            </div>
+	            <p class="weui_grid_label">
+	                实习
+	            </p>
+	        </a>
+	        <a href="/xuanjiang" class="weui_grid js_grid">
+	            <div class="weui_grid_icon">
+	                <img src="/images/icon_nav_tab.png" alt="">
+	            </div>
+	            <p class="weui_grid_label">
+	                宣讲会
+	            </p>
+	        </a> -->
+	    </div>
+	</div>
+
+<script src="/dist/lib/jquery-2.1.4.js"></script>
+<script src="/dist/js/jquery-weui.js"></script>
+<script>
+	$("#chat").click(function(){
+		$.alert("请关闭页面并在微信公众号页面输入对话就可以跟i小蜜聊天咯","主人，i小蜜是智能机器人哦，欢迎来调戏i小蜜~");
+	})
+</script>
+</body>
+</html>

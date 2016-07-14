@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="zh-CN"> 
+<head>
+    <title>
+        书籍信息详情
+    </title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,Chrome=1.0">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <link rel="stylesheet" href="/dist/lib/weui.css">
+    <link rel="stylesheet" href="/dist/css/jquery-weui.css">
+    <link rel="stylesheet" href="/main.css">
+</head>   
+<body>
+    <header class="header book-detail-header">
+        <img src=<%= result.imgSrc %> alt="书籍封面">
+    </header>
+    <article class="weui_article book-detail">
+        <section>
+            <h1 class="title">
+                <%= result.caption1 %>
+            </h1>
+            <section>
+                <h3>
+                    <%= result.title2 %>
+                </h3>
+                <p>
+                    <%= result.caption2 %>
+                </p>
+            </section>
+            <section>
+                <h3>
+                    <%= result.title3 %>
+                </h3>
+                <p>
+                    <%= result.caption3 %>
+                </p>
+            </section>
+            <section>
+                <h3>
+                    <%= result.title4 %>
+                </h3>
+                <p>
+                    <%= result.caption4 %>
+                </p>
+            </section>
+            <section>
+                <h3>
+                    <%= result.title5 %>
+                </h3>
+                <p>
+                    <%= result.caption5 %>
+                </p>
+            </section>
+            <section>
+                <h3>
+                    <%= result.title6 %>
+                </h3>
+                <p>
+                    <%= result.caption6 %>
+                </p>
+            </section>
+            <section>
+                <h3>
+                    <%= result.title7 %>
+                </h3>
+                <p>
+                    <%- result.caption7 %>
+                </p>
+            </section>
+        </section>
+    </article>
+<script src="/dist/lib/jquery-2.1.4.js"></script>
+<script src="/dist/js/jquery-weui.js"></script>
+</body>
+</html>

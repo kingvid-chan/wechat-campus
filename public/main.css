@@ -1,0 +1,335 @@
+body,html{
+	height: 100%;
+	-webkit-tap-highlight-color: transparent;
+}
+body{
+	background-color: #EEE;
+}
+.hide{
+	display: none;
+}
+.show{
+	display: block;
+}
+.button_sp_area{
+	margin-left: 15px;
+	margin-right: 15px;
+}
+.header .title{
+	text-align: center;
+    font-size: 34px;
+    color: #3cc51f;
+    font-weight: 400;
+    margin: 0 15%;
+}
+.header .title+p{
+	text-align: right;
+	padding-right: 5px;
+    color: #3cc51f;
+}
+.header{
+	padding: 35px 0;
+}
+.marginTop{
+	margin-top: 30px;
+}
+.btn_top{
+	width: 90%;
+	margin: 15px auto;
+}
+.btn_top img{
+	height: 25px;
+}
+.allowOneLine .weui_cell_ft{
+	max-height: 24px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	-webkit-box-flex: 2;
+    -webkit-flex: 2;
+    -ms-flex: 2;
+    flex: 2;
+}
+.allowOneLine .weui_cell_bd.weui_cell_primary p{
+	white-space: nowrap;
+}
+#Table1{
+	border: solid 1px;
+	border-collapse: collapse;
+	min-width: 413px;
+}
+#Table1 td{
+	border: solid 1px #000;
+}
+.search-content .weui_media_box.weui_media_appmsg .weui_media_hd{
+	line-height: normal;
+	height: auto;
+	text-align: left;
+	width: 40%;
+}
+.search-content .weui_media_bd{
+	text-align: right;
+	width: 60%;
+}
+.search-content p.weui_media_desc{
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+.collectionsNotify{
+	border: solid 1px #eee;
+	border-collapse: collapse;
+	margin: 15px auto;
+}
+.collectionsNotify td{
+	width: 25%;
+	border: solid 1px #eee;
+	text-align: center;
+	padding: 15px auto;
+}
+.book-detail-header{
+	text-align: center;
+	padding: 35px 0 5px;
+}
+.book-detail h1{
+	font-weight: bold;
+}
+.disabled.weui_panel_ft{
+	color:#ccc;
+}
+.lendingList .weui_panel_ft{
+	font-size: 17px;
+	overflow: hidden;
+}
+.weui_panel_ft.renewed{
+	color: #04BE02;
+}
+.weui_panel_ft.renewError{
+	color: #F50808;
+}
+.canvas{
+	width: 100%;
+	/*height: 12.5rem;
+	margin-bottom: 1.5rem;*/
+}
+body.report{
+	background-color: #fff;
+}
+body.report .weui_panel_hd h3{
+	text-indent: 15px;
+}
+body.report .weui_panel_hd h3 b{
+	font-size: 25px;
+	color: #33C24F;
+}
+/*
+	 progress Bar
+*/
+.meter { 
+	height: 20px;  /* Can be anything */
+	position: relative;
+	margin: 60px 0 20px 0; /* Just for demo spacing */
+	background: #ddd;
+	-moz-border-radius: 25px;
+	-webkit-border-radius: 25px;
+	border-radius: 25px;
+	padding: 10px;
+	-webkit-box-shadow: inset 0 -1px 1px rgba(255,255,255,0.3);
+	-moz-box-shadow   : inset 0 -1px 1px rgba(255,255,255,0.3);
+	box-shadow        : inset 0 -1px 1px rgba(255,255,255,0.3);
+}
+.meter > span {
+	display: block;
+	height: 100%;
+	   -webkit-border-top-right-radius: 8px;
+	-webkit-border-bottom-right-radius: 8px;
+	       -moz-border-radius-topright: 8px;
+	    -moz-border-radius-bottomright: 8px;
+	           border-top-right-radius: 8px;
+	        border-bottom-right-radius: 8px;
+	    -webkit-border-top-left-radius: 20px;
+	 -webkit-border-bottom-left-radius: 20px;
+	        -moz-border-radius-topleft: 20px;
+	     -moz-border-radius-bottomleft: 20px;
+	            border-top-left-radius: 20px;
+	         border-bottom-left-radius: 20px;
+	background-color: rgb(43,194,83);
+	background-image: -webkit-gradient(
+	  linear,
+	  left bottom,
+	  left top,
+	  color-stop(0, rgb(43,194,83)),
+	  color-stop(1, rgb(84,240,84))
+	 );
+	background-image: -moz-linear-gradient(
+	  center bottom,
+	  rgb(43,194,83) 37%,
+	  rgb(84,240,84) 69%
+	 );
+	-webkit-box-shadow: 
+	  inset 0 2px 9px  rgba(255,255,255,0.3),
+	  inset 0 -2px 6px rgba(0,0,0,0.4);
+	-moz-box-shadow: 
+	  inset 0 2px 9px  rgba(255,255,255,0.3),
+	  inset 0 -2px 6px rgba(0,0,0,0.4);
+	box-shadow: 
+	  inset 0 2px 9px  rgba(255,255,255,0.3),
+	  inset 0 -2px 6px rgba(0,0,0,0.4);
+	position: relative;
+	overflow: hidden;
+}
+.meter > span:after, .animate > span > span {
+	content: "";
+	position: absolute;
+	top: 0; left: 0; bottom: 0; right: 0;
+	background-image: 
+	   -webkit-gradient(linear, 0 0, 100% 100%, 
+	      color-stop(.25, rgba(255, 255, 255, .2)), 
+	      color-stop(.25, transparent), color-stop(.5, transparent), 
+	      color-stop(.5, rgba(255, 255, 255, .2)), 
+	      color-stop(.75, rgba(255, 255, 255, .2)), 
+	      color-stop(.75, transparent), to(transparent)
+	   );
+	background-image: 
+		-moz-linear-gradient(
+		  -45deg, 
+	      rgba(255, 255, 255, .2) 25%, 
+	      transparent 25%, 
+	      transparent 50%, 
+	      rgba(255, 255, 255, .2) 50%, 
+	      rgba(255, 255, 255, .2) 75%, 
+	      transparent 75%, 
+	      transparent
+	   );
+	z-index: 1;
+	-webkit-background-size: 50px 50px;
+	-moz-background-size: 50px 50px;
+	-webkit-animation: move 2s linear infinite;
+	   -webkit-border-top-right-radius: 8px;
+	-webkit-border-bottom-right-radius: 8px;
+	       -moz-border-radius-topright: 8px;
+	    -moz-border-radius-bottomright: 8px;
+	           border-top-right-radius: 8px;
+	        border-bottom-right-radius: 8px;
+	    -webkit-border-top-left-radius: 20px;
+	 -webkit-border-bottom-left-radius: 20px;
+	        -moz-border-radius-topleft: 20px;
+	     -moz-border-radius-bottomleft: 20px;
+	            border-top-left-radius: 20px;
+	         border-bottom-left-radius: 20px;
+	overflow: hidden;
+}
+
+.animate > span:after {
+	display: none;
+}
+
+@-webkit-keyframes move {
+    0% {
+       background-position: 0 0;
+    }
+    100% {
+       background-position: 50px 50px;
+    }
+}
+
+.orange > span {
+	background-color: #f1a165;
+	background-image: -moz-linear-gradient(top, #f1a165, #f36d0a);
+	background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0, #f1a165),color-stop(1, #f36d0a));
+	background-image: -webkit-linear-gradient(#f1a165, #f36d0a); 
+}
+
+.red > span {
+	background-color: #f0a3a3;
+	background-image: -moz-linear-gradient(top, #f0a3a3, #f42323);
+	background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0, #f0a3a3),color-stop(1, #f42323));
+	background-image: -webkit-linear-gradient(#f0a3a3, #f42323);
+}
+
+.nostripes > span > span, .nostripes > span:after {
+	-webkit-animation: none;
+	background-image: none;
+}
+
+/*
+ * progress Bar style end
+ */
+
+.login-wrapper .weui_dialog_bd input[type='text']{
+	display: none;
+}
+
+
+/* 网络出错时的提示页面*/
+.err-wrapper{
+	text-align: center;
+}
+.err-wrapper a{
+	text-decoration: none;
+}
+.err-header h1.title{
+	color: #000;
+}
+
+/*一卡通历史交易明细*/
+.card-history{
+	width: 100%;
+	overflow-x:scroll;
+	padding-bottom: 15px;
+}
+.card-history table{
+	min-width: 530px;
+	border-collapse: collapse;
+	font-size: 14px;
+}
+.card-history table td{
+	border-bottom: solid 1px #ccc;
+	text-align: center;
+}
+header p.title{
+	text-align: center;
+}
+.card-history+.button_sp_area{
+	margin-bottom: 30px;
+}
+.course-content{
+	width: 100%;
+	overflow-x: scroll;
+	padding-bottom: 15px;
+}
+.weui_search_bar{
+	margin-top: 25px;
+}
+.report .arrow{
+	position: absolute;
+	bottom: 15px;
+	width: 100%;
+	text-align: center;
+	z-index: 9;
+}
+.report .arrow a {
+	text-decoration: none;
+	
+}
+.share-cover{
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 9;
+	background-color: rgba(0,0,0,0.7);
+}
+.share-cover img{
+	width: 100%;
+	top: 0;
+	left: 0;
+	position: absolute;
+}
+
+.report .weui_dialog {
+	top: 20%;
+}
+.lendHistory table{
+	font-size: 10px;
+}

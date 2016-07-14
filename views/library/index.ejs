@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="zh-CN">   
+<head>
+    <title>广财大图书馆</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,Chrome=1.0">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <link rel="stylesheet" href="/dist/lib/weui.css">
+    <link rel="stylesheet" href="/dist/css/jquery-weui.css">
+    <link rel="stylesheet" href="/main.css">
+</head>
+<body>
+	<div class="weui_search_bar" id="search_bar">
+	    <form class="weui_search_outer" action="/main/library/search" method="get">
+	        <div class="weui_search_inner">
+	            <i class="weui_icon_search">
+	            </i>
+	            <input type="search" name="searchStr" class="weui_search_input" id="search_input" placeholder="图书馆书目检索"
+	            required/>
+	            <a href="javascript:" class="weui_icon_clear" id="search_clear">
+	            </a>
+	        </div>
+	        <label for="search_input" class="weui_search_text" id="search_text">
+	            <i class="weui_icon_search">
+	            </i>
+	            <span>
+	                图书馆书目检索
+	            </span>
+	        </label>
+	    </form>
+	    <a href="javascript:" class="weui_search_cancel" id="search_cancel">
+	        取消
+	    </a>
+	</div>
+	<div id="search-content"></div>
+	<div class="weui_msg">
+	    <div class="weui_grids">
+	        <a href="/main/library/lendHistory" class="weui_grid js_grid">
+	            <div class="weui_grid_icon">
+	                <img src="/images/icon_nav_icons.png" alt="">
+	            </div>
+	            <p class="weui_grid_label">
+	                借阅历史
+	            </p>
+	        </a>
+	        <a href="/main/library/lending" class="weui_grid js_grid">
+	            <div class="weui_grid_icon">
+	                <img src="/images/icon_nav_button.png" alt="">
+	            </div>
+	            <p class="weui_grid_label">
+	                当前借阅
+	            </p>
+	        </a>
+	        <a href="/main/library/report?_id=<%= _id %>" class="weui_grid js_grid" data-id="progress">
+	            <div class="weui_grid_icon">
+	                <img src="/images/icon_nav_progress.png" alt="">
+	            </div>
+	            <p class="weui_grid_label">
+	                生成报告
+	            </p>
+	        </a>
+	    </div>
+	</div>
+<script src="/dist/lib/jquery-2.1.4.js"></script>
+<script src="/dist/js/jquery-weui.js"></script>
+</body>
+</html>

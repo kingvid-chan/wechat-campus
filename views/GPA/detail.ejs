@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatable" content="IE=Edge,Chrome=1.0">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="format-detection" content="email=no">
+    <title>成绩详情</title>
+    <link rel="stylesheet" href="/dist/lib/weui.css">
+    <link rel="stylesheet" href="/dist/css/jquery-weui.css">
+    <link rel="stylesheet" href="/main.css">
+</head>
+<body>
+    <div class="button_sp_area btn_top">
+        <a href="javascript:;" class="weui_btn weui_btn_plain_primary" id="getGPA">点击获取本学期绩点</a>
+    </div>    
+  <%  for (var index = 1; index < result.length; index++) { %>
+    <div class="weui_cells allowOneLine">
+       <% for (var _index = 0; _index < result[index].length; _index++) { %>
+       <% if(result[index][_index].indexOf('&nbsp;')===-1) { %>
+        <div class="weui_cell">
+            <div class="weui_cell_bd weui_cell_primary">
+                <p>
+                    <%= result[0][_index] %>
+                </p>
+            </div>
+            <div class="weui_cell_ft">
+                <%= result[index][_index] %>
+            </div>
+        </div>
+       <% } %> 
+       <% } %> 
+    </div>
+   <% } %> 
+            
+    
+<script src="/dist/lib/jquery-2.1.4.js"></script>
+<script src="/dist/js/jquery-weui.js"></script>
+<script>
+$(document).ready(function(){
+    $(document).on("click", "#getGPA",function() {
+        var xuefen = [];
+        var score = [];
+        var totalScore = 0;
+        var totalXuefen = 0;
+        $("p:contains(学分)").each(function(){
+            xuefen.push(parseInt($(this).parent().next().text()));
+        })
+        $("p:contains( 成绩)").each(function(){
+            if ($(this).parents('.weui_cells').find("p:contains(补考)").length>0) {
+                score.push(60);
+            }else{
+                var s = parseInt($(this).parent().next().text());
+                if (isNaN(s)) {
+                    score.push(parseInt($(this).parents('.weui_cell').prev().find('.weui_cell_ft').text()));
+                }else{
+                    score.push(s);
+                }
+            }
+        })
+        for (var i = 0; i < xuefen.length; i++) {
+            transfer(score[i],function(score){
+                totalScore+=xuefen[i]*score;
+                totalXuefen+=xuefen[i];
+            })
+        }
+        var average = parseFloat(totalScore/totalXuefen).toFixed(2);
+        $.alert("提示：重修成绩未在教务系统展示，如果你重修过，所计算出的绩点可能是不准确的", "你本学期的绩点是"+average);
+    });
+
+    function transfer(score, callback){
+        if (score>=60) {
+            var s = (score-50)/10;
+            callback(s);
+        }else{
+            callback(0);
+        }
+    }
+})
+</script>
+</body>
+</html>

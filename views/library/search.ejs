@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="zh-CN">   
+<head>
+    <title>广财大图书馆书目检索结果</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,Chrome=1.0">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <link rel="stylesheet" href="/dist/lib/weui.css">
+    <link rel="stylesheet" href="/dist/css/jquery-weui.css">
+    <link rel="stylesheet" href="/main.css">
+</head>
+<body>
+	<div class="weui_search_bar" id="search_bar">
+	    <form class="weui_search_outer" action="/main/library/search" method="get">
+	        <div class="weui_search_inner">
+	            <i class="weui_icon_search">
+	            </i>
+	            <input type="search" name="searchStr" class="weui_search_input" id="search_input" placeholder="图书馆书目检索"
+	            required value=<%= searchStr %> />
+	            <a href="javascript:" class="weui_icon_clear" id="search_clear">
+	            </a>
+	        </div>
+	        <label for="search_input" class="weui_search_text" id="search_text">
+	            <i class="weui_icon_search">
+	            </i>
+	            <span>
+	                图书馆书目检索
+	            </span>
+	        </label>
+	    </form>
+	    <a href="javascript:" class="weui_search_cancel" id="search_cancel">
+	        取消
+	    </a>
+	</div>
+	<div id="search-content" class="search-content">
+	<% if (result) { %>
+	<%	  for (var i = 0; i < result.length; i++) { %>
+		<div class="weui_panel weui_panel_access">
+		    <div class="weui_panel_hd">
+		        <%= result[i].title %>
+		    </div>
+		    <div class="weui_panel_bd">
+		        <a href="javascript:void(0);" class="weui_media_box weui_media_appmsg">
+		            <div class="weui_media_hd">
+		                <p class="weui_media_desc"><%= result[i].p2 %></p>
+		                <p class="weui_media_desc"><%= result[i].p3 %></p>
+		            </div>
+		            <div class="weui_media_bd">
+		            	<p class="weui_media_desc"><%= result[i].p1 %></p>
+		                <p class="weui_media_desc"><%= result[i].p4 %></p>
+		                <p class="weui_media_desc"><%- result[i].p5 %></p>
+		            </div>
+		        </a>
+		    </div>
+		    <a class="weui_panel_ft Collections" href="javascript:void(0);" data-id=<%= result[i].href %>>
+		        馆藏
+		    </a>
+		    <a class="weui_panel_ft">
+		        查看更多
+		    </a>
+		</div>
+	<% } %>	
+	<% }else{ %>
+		<header class="header err-header">
+			<h1 class="title">( ▼-▼ )</h1>
+		</header>
+		<div class="err-wrapper weui_text_area">
+			<p class="weui_msg_desc">
+	            本馆没有您检索的图书
+	        </p>
+		</div>
+	<% } %>	
+	</div>
+	
+<script src="/dist/lib/jquery-2.1.4.js"></script>
+<script src="/dist/js/jquery-weui.js"></script>
+<script>
+$(document).ready(function(){
+	$(".Collections").each(function(){
+		var href = '/main/library/bookDetail?'+$(this).attr('data-id');
+		$(this).next('a').attr('href',href);
+	})
+	$(".Collections").click(function(){
+		$.showLoading("正在努力加载...");
+		var id = $(this).attr('data-id');
+		var url = '/main/library/collections?'+id;
+		$.ajax({
+			url:url,
+			dataType:'json',
+			success:function(result){
+				$.hideLoading();
+				var html = "<table class='collectionsNotify'><tr><td>"+result[0][0]+"</td><td>"+result[0][1]+"</td><td>"+result[0][2]+"</td><td>"+result[0][3]+"</td></tr>";
+				for (var i = 1; i < result.length; i++) {
+					html+="<tr><td>"+result[i][0]+"</td><td>"+result[i][1]+"</td><td>"+result[i][2]+"</td><td>"+result[i][3]+"</td></tr>";
+				}
+				html+="</table>";
+				$.notification({
+				    title: "馆藏信息(建议通过手机截屏保存)",
+				    text: html,
+				    time: "5000"
+				});
+			}
+		})
+	})
+})	
+</script>
+</body>
+</html>

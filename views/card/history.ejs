@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="zh-CN">   
+<head>
+    <title>交易明细</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,Chrome=1.0">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <link rel="stylesheet" href="/dist/lib/weui.css">
+    <link rel="stylesheet" href="/dist/css/jquery-weui.css">
+    <link rel="stylesheet" href="/main.css">
+</head>
+<body>
+	<header class="header">
+		<p class="title">交易明细</p>
+	</header>
+	<div class="card-history">
+		<%- html %>
+	</div>
+	<div class="button_sp_area marginTop">
+	    <a href="javascript:;" class="weui_btn weui_btn_primary" id="getMoreHistory">查询更多</a>
+	</div>
+	<div class="card-history" id="more_history"></div>
+	<input type="hidden" id="openId" value="<%= openId %>">
+<script src="/dist/lib/jquery-2.1.4.js"></script>
+<script src="/dist/js/jquery-weui.js"></script>
+<script>
+$(document).ready(function(){
+	var unclicked = true;
+	$("#getMoreHistory").click(function(){
+		if (unclicked) {
+			$(this).addClass('weui_btn_disabled');
+			unclicked = false;
+			$.showLoading("正在努力加载...");
+			var openId = $("#openId").val();
+			$.ajax({
+				url:'/main/card/history?openId='+openId,
+				dataType:'html',
+				success:function(html){
+					$.hideLoading();
+					$("#more_history").append(html);
+				}
+			})
+		}
+	})
+})
+	
+</script>
+</body>
+</html>

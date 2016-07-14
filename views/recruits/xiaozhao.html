@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="zh-CN">   
+<head>
+    <title>爬虫</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,Chrome=1.0">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <link rel="stylesheet" href="normalize.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <ul id="recruitList"></ul>
+    <a href="#">加载更多。。</a>
+<script src="jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+    $.ajax({
+        type:'get',  
+        url : "/xiaozhao",
+        dataType : 'json', 
+        success  : function(data) {
+            console.log("%d pages",data.count);
+            var html="";
+            for (var i = 0; i < data.recruits.length; i++) {
+                html+="<li><a href='"+data.recruits[i].link+"'><h1>"+data.recruits[i].company+"</h1><p>"+data.recruits[i].workPlace+"</p><small>"+data.recruits[i].pubTime+"</small></a></li>";
+            }
+            $("#recruitList").append(html);
+        },  
+        error : function() {  
+            alert('fail');  
+        }  
+    });
+
+    //监听滚动事件
+    //如果滚到文档最末，则ajax请求更多数据
+    var windowHeight = $(window).height();
+    var lock = false;
+    $(window).scroll(function(){
+        var scrollTop = $(this).scrollTop();
+        var documentHeight = $(document).height();
+        var maxRoll = documentHeight-windowHeight-5;
+        if (scrollTop >= maxRoll && !lock) {
+            lock = true;
+            var start = $("#recruitList").children("li").length;
+            $.ajax({
+                type:'get',  
+                url : "/loadMore/"+start,
+                dataType : 'json', 
+                success  : function(data) {
+                    var html="";
+                    for (var i = 0; i < data.recruits.length; i++) {
+                        html+="<li><a href='"+data.recruits[i].link+"'><h1>"+data.recruits[i].company+"</h1><p>"+data.recruits[i].workPlace+"</p><small>"+data.recruits[i].pubTime+"</small></a></li>";
+                    }
+                    $("#recruitList").append(html);
+                    lock = false;
+                    console.log("rolling max and data return! --> unlock");
+                },  
+                error : function() {  
+                    alert('fail');  
+                }  
+            });
+        }
+    })
+})
+</script>
+</body>
+</html>
