@@ -13,7 +13,6 @@ var USERMSG = exports.USERMSG = mongoose.model('USERMSG',{
     cookie_jwxt: String,
     card_id:String
 });
-// new USERMSG({openId:"3",userName:"杨小兰",userNumber:"12251101241",password:"cd3399"}).save();
 var XIAOZHAO = exports.XIAOZHAO = mongoose.model('XIAOZHAO', {
   	company: String,
   	workPlace: String,
